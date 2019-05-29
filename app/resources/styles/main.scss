@@ -1,0 +1,121 @@
+/**
+ * Main styles for the entire site
+ */
+
+@import "fonts";
+@import "colors";
+
+body {
+  margin: 0;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p, div, label {
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+
+input, textarea {
+  font-size: 1.2em;
+}
+
+div.submit-wrap {
+  text-align: center;
+}
+button,
+input[type=button] {
+  font-size: 1.2em;
+  color: black;
+  background: transparent;
+  border: 1px black solid;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.content_wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  .nf-field-element textarea {
+    height: 100px;
+  }
+}
+
+.size-full {
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+header {
+  background: white;
+  text-align: center;
+  .header_wrapper {
+    background: white;
+    display: flex;
+    flex-direction: column-reverse;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    #logo_wrapper {
+
+      flex-grow: 1;
+      overflow: hidden;
+      background: url('/wp-content/themes/pomeloproductions/assets/images/fl-logo.svg') no-repeat center;
+      background-size: auto;
+      border: 10px solid transparent;
+      background-clip: content-box;
+    }
+  }
+  nav#main {
+    display: inline-block;
+    margin: 0 auto;
+    border-top: 1px solid $green;
+    padding: 5px 0;
+
+    a {
+      color: $green;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 1.5em;
+      padding: 5px 15px;
+      white-space: nowrap;
+
+      &:hover {
+        color: $font;
+      }
+    }
+  }
+}
+
+footer {
+  margin: 0 0 20px;
+
+  .content_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media screen and (min-width: 720px) {
+      flex-direction: row;
+    }
+
+    #social_media {
+      @media screen and (min-width: 720px) {
+
+        text-align: right;
+      }
+
+      a {
+        width: 40px;
+        height: 40px;
+        color: $font;
+        margin: 0 0 0 10px;
+        display: inline-block;
+      }
+    }
+  }
+}

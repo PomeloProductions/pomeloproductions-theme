@@ -1,0 +1,9 @@
+{{#if featured_style}}
+    </div> <!-- close the content wrapper -->
+{{/if}}
+<div class="{{#if featured_style}}featured_image{{/if}} slider no-padding section">
+    {{{slider}}}
+</div>
+{{#if featured_style}}
+    <div class="content_wrapper large-top-padding"><!-- Open the content wrapper again -->
+{{/if}}

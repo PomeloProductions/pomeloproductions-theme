@@ -1,0 +1,15 @@
+<div class="section video">
+    {{#if title}}<h2>{{{title}}}</h2>{{/if}}
+    {{#if subtitle}}<h3>{{{subtitle}}}</h3>{{/if}}
+
+    <div class="video-wrapper">
+        <video>
+            <source src="{{video_url}}">
+        </video>
+        <div class="play-button-wrapper" style="background-image: url('{{thumbnail_url}}')">
+            <div class="thumbnail-overlay">
+                <button style="background-image: url('{{theme_url}}/assets/images/play-button.svg')"></button>
+            </div>
+        </div>
+    </div>
+</div>

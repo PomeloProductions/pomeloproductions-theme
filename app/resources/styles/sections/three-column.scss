@@ -1,0 +1,10 @@
+@media screen and (min-width: 840px) {
+  .three-column {
+    display: flex;
+    justify-content: space-around;
+    >div {
+      width: 33%;
+      padding: 0 20px 0 0;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'ailerons';
+  src: url('/wp-content/themes/pomeloproductions/assets/fonts/ailerons-typeface-webfont.woff2') format('woff2'),
+  url('/wp-content/themes/pomeloproductions/assets/fonts/ailerons-typeface-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'prologue_script';
+  src: url('/wp-content/themes/pomeloproductions/assets/fonts/prologuescript-regular-webfont.woff2') format('woff2'),
+  url('/wp-content/themes/pomeloproductions/assets/fonts/prologuescript-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$brandingFont : 'ailerons', arial, sans-serif;
+
+.script {
+  font-family: 'prologue_script', cursive;
+  font-variant-ligatures: common-ligatures;
+}

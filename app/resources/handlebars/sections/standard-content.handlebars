@@ -1,0 +1,20 @@
+{{#if full_width}}
+    </div> <!-- close the content wrapper -->
+    <div {{#if id}}id="{{id}}"{{/if}} class="section full-width-section">
+{{else}}
+    <div {{#if id}}id="{{id}}"{{/if}} class="content_wrapper">
+    <div class="section">
+{{/if}}
+
+    {{#if title}}<h2>{{{title}}}</h2>{{/if}}
+    {{#if subtitle}}<h3>{{{subtitle}}}</h3>{{/if}}
+
+    {{{content}}}
+
+{{#if full_width}}
+    </div>
+    <div  class="content_wrapper top-padding">
+{{else}}
+    </div>
+    </div>
+{{/if}}

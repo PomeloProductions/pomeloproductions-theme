@@ -1,0 +1,4 @@
+.env
+ubuntu-bionic-18.04-cloudimg-console.log
+/vendor
+node_modules

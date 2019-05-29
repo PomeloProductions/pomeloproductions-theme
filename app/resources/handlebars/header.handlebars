@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="no-js" {{ language_attributes }}>
+<head>
+    <meta charset="{{ charset }}" />
+
+    {{{ wp_head }}}
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="{{ stylesheet_url }}"/>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <title>{{ title }}</title>
+
+</head>
+
+<body class="{{ body_class }}">
+
+    {{#if has_header}}
+    <header>
+        <div class="header_wrapper">
+            <a id="open_mobile" href="#"></a>
+            <nav id="main">
+                {{#each navigation}}
+                    <a href="{{this.url}}">{{this.title}}</a>
+                {{/each}}
+            </nav>
+            <div id="logo_wrapper">
+            </div>
+        </div>
+    </header>
+    {{/if}}

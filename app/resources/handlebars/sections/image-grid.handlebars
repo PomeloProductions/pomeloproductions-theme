@@ -1,0 +1,25 @@
+<div class="base-padding">
+    <div class="section image-grid {{#if carousel}}carousel{{/if}}">
+        {{#if title}}<h2>{{{title}}}</h2>{{/if}}
+        {{#if subtitle}}<h3>{{{subtitle}}}</h3>{{/if}}
+
+        {{#if content}}<div>{{{content}}}</div>{{/if}}
+
+        {{#each rows}}
+
+            <div class="image-wrapper row-{{class}}">
+
+                {{#each images}}
+                    {{#if link}}
+                        <a class="item" href="{{link}}">
+                            <div class="carousel-image" style="background-image: url('{{src}}')"></div>
+                        </a>
+                    {{else}}
+                        <div class="item carousel-image" style="background-image: url('{{src}}')"></div>
+                    {{/if}}
+                {{/each}}
+            </div>
+
+        {{/each}}
+    </div>
+</div>

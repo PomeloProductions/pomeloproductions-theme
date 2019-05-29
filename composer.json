@@ -1,0 +1,9 @@
+{
+  "require" : {
+    "xamin/handlebars.php": "dev-master",
+    "cmb2/cmb2": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {"Theme\\": "app/src"}
+  }
+}

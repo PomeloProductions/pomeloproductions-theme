@@ -1,0 +1,27 @@
+<div {{#if id}}id="{{id}}"{{/if}} class="content_wrapper">
+    <div class="section">
+        {{{ content }}}
+        {{#each projects}}
+            <div class="three-column {{#if @first}}active{{/if}}">
+                {{#each this}}
+                    <div>
+                        <h2>{{title}}</h2>
+                        {{{content}}}
+                        <div class="links">
+                            {{#each links}}
+                                <a href="{{this}}" title="{{@key}}" target="_blank"><img src="{{theme_url}}/assets/images/social/{{@key}}.svg"/></a>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+
+        {{#if multiple_rows}}
+            <div class="show_more-wrapper">
+                <button id="show_more">Show More</button>
+            </div>
+        {{/if}}
+
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div {{#if id}}id="{{id}}"{{/if}} class="narrow-content">
+    {{{ top_content }}}
+</div>
+{{#each columns}}
+    <div class="{{padding_class}} {{layout_class}}">
+        <div class="two-column">
+            <div>{{{this.column_1}}}</div>
+            <div>{{{this.column_2}}}</div>
+        </div>
+    </div>
+{{/each}}

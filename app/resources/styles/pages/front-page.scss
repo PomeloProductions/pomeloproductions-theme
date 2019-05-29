@@ -1,0 +1,20 @@
+/**
+ * styles for the front page of the site
+ */
+@import "../colors";
+
+body.home {
+
+  header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column-reverse;
+
+    .header_wrapper {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
