@@ -53,14 +53,16 @@ class Theme
     private $mainNavigationPages;
 
     /**
+     * @var ChildTheme
+     */
+    private $childTheme;
+
+    /**
      * Theme constructor.
      */
     public function __construct()
     {
-        $this->templateEngine = new Handlebars([
-            'loader' => new FilesystemLoader(__DIR__ . '/../resources/handlebars'),
-            'partials_loader' => new FilesystemLoader(__DIR__ . '/../resources/handlebars/partials')
-        ]);
+        $this->templateEngine = $this->buildTemplateEngine(__DIR__);
 
         $this->optionsManager = new OptionsManager();
 
@@ -84,13 +86,33 @@ class Theme
     }
 
     /**
+     * @param ChildTheme $childTheme
+     */
+    public function setChildTheme(ChildTheme $childTheme)
+    {
+        $this->childTheme = $childTheme;
+    }
+
+    /**
+     * @param $directory
+     * @return Handlebars
+     */
+    public function buildTemplateEngine($directory)
+    {
+        return new Handlebars([
+            'loader' => new FilesystemLoader($directory . '/../resources/handlebars'),
+            'partials_loader' => new FilesystemLoader($directory . '/../resources/handlebars/partials')
+        ]);
+    }
+
+    /**
      * Inits the admin properly
      */
     public function initAdmin()
     {
         global $wpdb;
 
-        new RootController($wpdb, $this->templateEngine, $this->loadBuildManifest());
+        new RootController($wpdb, $this->templateEngine, $this->loadBuildManifest(__DIR__));
     }
 
     /**
@@ -109,11 +131,12 @@ class Theme
     /**
      * Loads the build manifest from file
      *
+     * @param $directory
      * @return object
      */
-    private function loadBuildManifest()
+    private function loadBuildManifest($directory)
     {
-        return json_decode(file_get_contents(__DIR__ . '/../../build/assets.json'));
+        return json_decode(file_get_contents($directory . '/../../build/assets.json'));
     }
 
     /**
@@ -121,10 +144,12 @@ class Theme
      */
     public function registerScripts()
     {
-        $manifest = $this->loadBuildManifest();
-        $main = $manifest->main;
-        wp_enqueue_style('theme-css', get_template_directory_uri() . "/build/" . $main->css);
-        wp_enqueue_script('theme-js', get_template_directory_uri() . "/build/" . $main->js);
+        if (!$this->childTheme || !$this->childTheme->registerScripts()) {
+            $manifest = $this->loadBuildManifest(__DIR__);
+            $main = $manifest->main;
+            wp_enqueue_style('theme-css', get_template_directory_uri() . "/build/" . $main->css);
+            wp_enqueue_script('theme-js', get_template_directory_uri() . "/build/" . $main->js);
+        }
     }
 
     /**
@@ -208,6 +233,14 @@ class Theme
     public function buildPageTemplate(WP_Post $page) : BaseTemplate
     {
         $options = $this->getPageOptions($page);
+
+        if ($this->childTheme) {
+            $template = $this->childTheme->buildPageTemplate($page);
+
+            if ($template) {
+                return $template;
+            }
+        }
 
         switch ($page->page_template) {
             case 'page-composite.php':
