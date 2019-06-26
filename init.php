@@ -6,4 +6,9 @@ use PomeloProductions\Theme;
 
 $theme = new Theme();
 $page = get_post();
-echo $theme->showPage($page);
+
+if ($post == null) {
+    echo $theme->showError(404);
+} else {
+    echo $theme->showPage($page);
+}

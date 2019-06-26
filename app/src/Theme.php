@@ -18,7 +18,7 @@ use WP_Post;
 
 /**
  * Class Theme
- * @package Theme
+ * @package PomeloProductions
  */
 class Theme
 {
@@ -137,6 +137,29 @@ class Theme
     }
 
     /**
+     * @param int $statusCode
+     * @return string
+     */
+    public function showError(int $statusCode)
+    {
+        status_header($statusCode);
+
+        $baseTemplateVariables = [
+            'theme_url' => get_template_directory_uri(),
+            'social_links' => $this->socialMediaSettings->getSocialLinks($this->optionsManager),
+            'header_image' => get_header_image(),
+        ];
+
+        $pageContent = $this->renderHeader($baseTemplateVariables);
+        $pageContent.= $this->templateEngine->render('default', [
+            'page_content' => '<h1 id="error-code">' . $statusCode . '</h1>',
+        ]);
+        $pageContent.= $this->renderFooter($baseTemplateVariables);
+
+        return $pageContent;
+    }
+
+    /**
      * Shows a single wordpress page
      *
      * @param \WP_Post $page
@@ -200,9 +223,10 @@ class Theme
      * Renders the header properly
      *
      * @param $templateVariables
+     * @param BaseTemplate $template
      * @return string
      */
-    private function renderHeader($templateVariables, BaseTemplate $template)
+    private function renderHeader($templateVariables, BaseTemplate $template = null)
     {
         $templateVariables['language_attributes'] = get_language_attributes();
         $templateVariables['charset'] = get_bloginfo('charset');
@@ -216,7 +240,9 @@ class Theme
         $templateVariables['title'] = get_the_title();
         $templateVariables['body_class'] = join(" ", get_body_class());
 
-        $templateVariables['has_header'] = $
+        if ($template) {
+            $templateVariables['has_header'] = $template->hasHeader();
+        }
 
         $templateVariables['navigation'] = $this->mainNavigation->getNavigationItems();
 
