@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Sections;
+namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use Theme\Admin\ACFHelpers\ColorPickerField;
-use Theme\Admin\ACFHelpers\ImageField;
-use Theme\Admin\ACFHelpers\NumberField;
-use Theme\Admin\ACFHelpers\TextField;
-use Theme\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\ColorPickerField;
+use PomeloProductions\Admin\ACFHelpers\ImageField;
+use PomeloProductions\Admin\ACFHelpers\NumberField;
+use PomeloProductions\Admin\ACFHelpers\TextField;
+use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
 
 /**
  * Class BackgroundImageOverlay

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Sections;
+namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use Theme\Admin\ACFHelpers\NumberField;
+use PomeloProductions\Admin\ACFHelpers\NumberField;
 
 /**
  * Class Spacer

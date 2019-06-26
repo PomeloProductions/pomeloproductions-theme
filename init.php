@@ -2,7 +2,7 @@
 /**
  * Simply include this file to display a page :)
  */
-use Theme\Theme;
+use PomeloProductions\Theme;
 
 $theme = new Theme();
 $page = get_post();

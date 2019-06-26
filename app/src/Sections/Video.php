@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Sections;
+namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use Theme\Admin\ACFHelpers\ImageField;
-use Theme\Admin\ACFHelpers\TextField;
+use PomeloProductions\Admin\ACFHelpers\ImageField;
+use PomeloProductions\Admin\ACFHelpers\TextField;
 
 /**
  * Class Video

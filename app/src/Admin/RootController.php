@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Admin;
+namespace PomeloProductions\Admin;
 
 use Handlebars\Handlebars;
-use Theme\Templates\Page\CompositeTemplate;
+use PomeloProductions\Templates\Page\CompositeTemplate;
 use wpdb;
 
 /**

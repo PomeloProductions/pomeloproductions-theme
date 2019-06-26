@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Sections;
+namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use Theme\Admin\ACFHelpers\TextField;
-use Theme\Admin\ACFHelpers\TrueFalseField;
-use Theme\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\TextField;
+use PomeloProductions\Admin\ACFHelpers\TrueFalseField;
+use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
 
 /**
  * Class StandardContent

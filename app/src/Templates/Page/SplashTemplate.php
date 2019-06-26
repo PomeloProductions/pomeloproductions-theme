@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Templates\Page;
+namespace PomeloProductions\Templates\Page;
 
 use Handlebars\Handlebars;
-use Theme\Templates\BaseTemplate;
+use PomeloProductions\Templates\BaseTemplate;
 
 /**
  * Class SplashTemplate

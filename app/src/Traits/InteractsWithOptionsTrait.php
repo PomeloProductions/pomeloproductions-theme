@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Traits;
+namespace PomeloProductions\Traits;
 
 /**
  * Trait InteractsWithOptionsTrait

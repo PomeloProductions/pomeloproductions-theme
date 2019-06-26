@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Templates;
+namespace PomeloProductions\Templates;
 
 use Handlebars\Handlebars;
 

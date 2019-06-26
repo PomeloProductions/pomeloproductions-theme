@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Sections;
+namespace PomeloProductions\Sections;
 
-use Theme\Contracts\CanRenderContentContract;
-use Theme\Traits\CanProcessContentTrait;
+use PomeloProductions\Contracts\CanRenderContentContract;
+use PomeloProductions\Traits\CanProcessContentTrait;
 
 /**
  * Class BaseSection

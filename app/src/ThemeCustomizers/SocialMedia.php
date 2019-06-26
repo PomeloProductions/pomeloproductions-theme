@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\ThemeCustomizers;
-use Theme\Utility\OptionsManager;
+namespace PomeloProductions\ThemeCustomizers;
+
+use PomeloProductions\Utility\OptionsManager;
 
 /**
  * Class SocialMedia

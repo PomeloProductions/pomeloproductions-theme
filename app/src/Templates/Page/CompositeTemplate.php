@@ -1,25 +1,25 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Templates\Page;
+namespace PomeloProductions\Templates\Page;
 
 use Handlebars\Handlebars;
-use Theme\Admin\ACFHelpers\ImageField;
-use Theme\Sections\BackgroundImageOverlay;
-use Theme\Sections\BaseSection;
-use Theme\Sections\Featured;
-use Theme\Sections\FeaturedImage;
-use Theme\Sections\ImageGrid;
-use Theme\Sections\PageTitle;
-use Theme\Sections\Projects;
-use Theme\Sections\Slider;
-use Theme\Sections\SocialMediaIcons;
-use Theme\Sections\Spacer;
-use Theme\Sections\StandardContent;
-use Theme\Sections\ThreeColumn;
-use Theme\Sections\TwoColumn;
-use Theme\Sections\Video;
-use Theme\Templates\BaseTemplate;
+use PomeloProductions\Admin\ACFHelpers\ImageField;
+use PomeloProductions\Sections\BackgroundImageOverlay;
+use PomeloProductions\Sections\BaseSection;
+use PomeloProductions\Sections\Featured;
+use PomeloProductions\Sections\FeaturedImage;
+use PomeloProductions\Sections\ImageGrid;
+use PomeloProductions\Sections\PageTitle;
+use PomeloProductions\Sections\Projects;
+use PomeloProductions\Sections\Slider;
+use PomeloProductions\Sections\SocialMediaIcons;
+use PomeloProductions\Sections\Spacer;
+use PomeloProductions\Sections\StandardContent;
+use PomeloProductions\Sections\ThreeColumn;
+use PomeloProductions\Sections\TwoColumn;
+use PomeloProductions\Sections\Video;
+use PomeloProductions\Templates\BaseTemplate;
 
 /**
  * Class CompositeTemplate

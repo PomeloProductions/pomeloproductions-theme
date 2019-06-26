@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme\Templates;
+namespace PomeloProductions\Templates;
 
-use Theme\Contracts\CanRenderContentContract;
-use Theme\Theme;
-use Theme\Traits\CanProcessContentTrait;
-use Theme\Traits\InteractsWithOptionsTrait;
+use PomeloProductions\Contracts\CanRenderContentContract;
+use PomeloProductions\Theme;
+use PomeloProductions\Traits\CanProcessContentTrait;
+use PomeloProductions\Traits\InteractsWithOptionsTrait;
 use WP_Post;
 
 /**

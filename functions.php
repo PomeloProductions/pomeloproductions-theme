@@ -26,5 +26,5 @@ remove_action('wp_head', 'adjacent_posts_rel_link', 10); // remove the next and 
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10);
 remove_action('wp_head', 'wp_shortlink_wp_head', 10);
 
-$theme = new \Theme\Theme();
+$theme = new \PomeloProductions\Theme();
 $theme->register();

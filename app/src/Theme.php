@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Theme;
+namespace PomeloProductions;
 
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
-use Theme\Admin\RootController;
-use Theme\Navigation\Footer;
-use Theme\Navigation\Main;
-use Theme\Templates\BaseTemplate;
-use Theme\Templates\DefaultTemplate;
-use Theme\Templates\Page\CompositeTemplate;
-use Theme\Templates\Page\SplashTemplate;
-use Theme\ThemeCustomizers\SocialMedia;
-use Theme\Utility\OptionsManager;
+use PomeloProductions\Admin\RootController;
+use PomeloProductions\Navigation\Footer;
+use PomeloProductions\Navigation\Main;
+use PomeloProductions\Templates\BaseTemplate;
+use PomeloProductions\Templates\DefaultTemplate;
+use PomeloProductions\Templates\Page\CompositeTemplate;
+use PomeloProductions\Templates\Page\SplashTemplate;
+use PomeloProductions\ThemeCustomizers\SocialMedia;
+use PomeloProductions\Utility\OptionsManager;
 use WP_Post;
 
 /**
