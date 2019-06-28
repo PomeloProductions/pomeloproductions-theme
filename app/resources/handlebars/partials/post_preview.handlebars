@@ -1,0 +1,34 @@
+<div class="post">
+    {{#if thumbnail}}
+        {{#if link}}
+            <a href="{{link}}">
+        {{else}}
+            <div>
+        {{/if}}
+
+            <img class="thumbnail" src="{{thumbnail}}">
+
+        {{#if link}}
+            </a>
+        {{else}}
+            </div>
+        {{/if}}
+    {{/if}}
+    <div class="preview">
+        {{#if wrap_title}}<h2>{{/if}}
+            {{{title}}}
+        {{#if wrap_title}}</h2>{{/if}}
+
+        <div class="excerpt">{{{excerpt}}}</div>
+
+        {{#if content}}
+            <div class="content">{{{content}}}</div>
+        {{/if}}
+
+        {{#if link}}
+            <p class="link"><a href="{{link}}">{{post_link_text}}</a></p>
+        {{else}}
+            <a class="show-more" href="#">{{post_link_text}}</a>
+        {{/if}}
+    </div>
+</div>

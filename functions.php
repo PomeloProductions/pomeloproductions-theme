@@ -13,6 +13,17 @@
 require_once 'vendor/autoload.php';
 require_once 'vendor/cmb2/cmb2/init.php';
 
+
+function endsWith($haystack, $needle)
+{
+    $length = strlen($needle);
+    if ($length == 0) {
+        return true;
+    }
+
+    return (substr($haystack, -$length) === $needle);
+}
+
 // Clean up wordpres <head>
 remove_action('wp_head', 'rsd_link'); // remove really simple discovery link
 remove_action('wp_head', 'wp_generator'); // remove wordpress version

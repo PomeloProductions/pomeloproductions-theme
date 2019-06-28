@@ -12,6 +12,7 @@ use PomeloProductions\Templates\BaseTemplate;
 use PomeloProductions\Templates\DefaultTemplate;
 use PomeloProductions\Templates\Page\CompositeTemplate;
 use PomeloProductions\Templates\Page\SplashTemplate;
+use PomeloProductions\Templates\PostsTemplate;
 use PomeloProductions\ThemeCustomizers\SocialMedia;
 use PomeloProductions\Utility\OptionsManager;
 use WP_Post;
@@ -247,6 +248,13 @@ class Theme
                 return new CompositeTemplate($this, $page, $options);
             case 'page-splash.php':
                 return new SplashTemplate($this, $page, $options);
+        }
+        // WordPress is dumb, but you already knew that
+        // This doesn't check for the home page, but instead checks for the blog index
+        if (is_home()) {
+            $page = get_post(get_option('page_for_posts', true));
+            $options = $this->getPageOptions($page);
+            return new PostsTemplate($this, $page, $options);
         }
 
         return new DefaultTemplate($this, $page, $options);

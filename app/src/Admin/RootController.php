@@ -45,7 +45,10 @@ class RootController
         if (function_exists('acf_add_local_field_group')) {
 
             acf_add_local_field_group(CompositeTemplate::getACFGroup());
-            $this->childTheme->registerAdmin();
+
+            if ($this->childTheme) {
+                $this->childTheme->registerAdmin();
+            }
         }
 
     //    add_action('admin_enqueue_scripts', [$this, 'registerAdminScripts'], 100);
