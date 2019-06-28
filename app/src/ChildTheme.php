@@ -36,6 +36,17 @@ abstract class ChildTheme
     public abstract function buildPageTemplate(WP_Post $page) : ?BaseTemplate;
 
     /**
+     * Allows child themes to modify header variables in any ways
+     *
+     * @param array $headerVariables
+     * @return array
+     */
+    public function filterHeaderVariables(array $headerVariables): array
+    {
+        return $headerVariables;
+    }
+
+    /**
      * Runs when the scripts are registered. Returns true if everything is registered,
      * or false if the parent theme should continue registering scripts
      *

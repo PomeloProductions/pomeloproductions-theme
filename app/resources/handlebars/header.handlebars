@@ -31,8 +31,13 @@
                     <a href="{{this.url}}">{{this.title}}</a>
                 {{/each}}
             </nav>
-            <div id="logo_wrapper">
-            </div>
+            {{#if image_branding}}
+                <div id="logo_wrapper">
+                </div>
+            {{/if}}
+            {{#if text_branding}}
+                <h1>{{branding}}</h1>
+            {{/if}}
         </div>
     </header>
     {{/if}}

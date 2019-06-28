@@ -287,6 +287,10 @@ class Theme
 
         $templateVariables['navigation'] = $this->mainNavigation->getNavigationItems();
 
+        if ($this->childTheme) {
+            $templateVariables = $this->childTheme->filterHeaderVariables($templateVariables);
+        }
+
         return $this->templateEngine->render('header', $templateVariables);
     }
 
