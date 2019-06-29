@@ -59,6 +59,16 @@ class Theme
     private $childTheme;
 
     /**
+     * @var string
+     */
+    private $buildAssetsDirectory;
+
+    /**
+     * @var string
+     */
+    private $publicBuildDirectory;
+
+    /**
      * Theme constructor.
      */
     public function __construct()
@@ -70,6 +80,8 @@ class Theme
         $this->mainNavigation = new Main();
         $this->footerNavigation = new Footer();
         $this->socialMediaSettings = new SocialMedia();
+        $this->buildAssetsDirectory = __DIR__ . '/../../build/';
+        $this->publicBuildDirectory = get_template_directory_uri() . "/build/";
     }
 
     /**
@@ -87,11 +99,27 @@ class Theme
     }
 
     /**
+     * @param string $buildAssetsDirectory
+     */
+    public function setBuildAssetsDirectory(string $buildAssetsDirectory): void
+    {
+        $this->buildAssetsDirectory = $buildAssetsDirectory;
+    }
+
+    /**
      * @param ChildTheme $childTheme
      */
     public function setChildTheme(ChildTheme $childTheme)
     {
         $this->childTheme = $childTheme;
+    }
+
+    /**
+     * @param string $publicBuildDirectory
+     */
+    public function setPublicBuildDirectory(string $publicBuildDirectory): void
+    {
+        $this->publicBuildDirectory = $publicBuildDirectory;
     }
 
     /**
@@ -132,12 +160,11 @@ class Theme
     /**
      * Loads the build manifest from file
      *
-     * @param $directory
      * @return object
      */
-    private function loadBuildManifest($directory)
+    private function loadBuildManifest()
     {
-        return json_decode(file_get_contents($directory . '/../../build/assets.json'));
+        return json_decode(file_get_contents($this->buildAssetsDirectory . 'assets.json'));
     }
 
     /**
@@ -148,8 +175,8 @@ class Theme
         if (!$this->childTheme || !$this->childTheme->registerScripts()) {
             $manifest = $this->loadBuildManifest(__DIR__);
             $main = $manifest->main;
-            wp_enqueue_style('theme-css', get_template_directory_uri() . "/build/" . $main->css);
-            wp_enqueue_script('theme-js', get_template_directory_uri() . "/build/" . $main->js);
+            wp_enqueue_style('theme-css', $this->publicBuildDirectory . $main->css);
+            wp_enqueue_script('theme-js', $this->publicBuildDirectory . $main->js);
         }
     }
 
