@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\ColorPickerField;
-use PomeloProductions\Admin\ACFHelpers\ImageField;
-use PomeloProductions\Admin\ACFHelpers\NumberField;
-use PomeloProductions\Admin\ACFHelpers\TextField;
-use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\Fields\ColorPickerField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\ImageField;
+use PomeloProductions\Admin\ACFHelpers\Fields\NumberField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
+use PomeloProductions\Admin\ACFHelpers\Fields\WYSIWYGField;
 
 /**
  * Class BackgroundImageOverlay
@@ -88,37 +89,35 @@ class BackgroundImageOverlay extends BaseSection
      * Gets the acf fields required for this section
      *
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic): GroupField
     {
-        return array(
-            'key' => 'field_5bbferg452be459a',
-            'label' => 'Background Image Overlay Editor',
-            'name' => 'background_image_overlay_editor',
-            'type' => 'group',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new TextField('field_hfu67h4b', 'id', 'The optional id for the section if this section should respond to link clicks'))->export(),
-                (new WYSIWYGField('field_645tgrwihwe43', 'content', 'Enter the text to show above the background'))
-                    ->setRequired()->export(),
-                (new NumberField('field_389t4uyfehj', 'height', 'Enter the height of this section in percentage of the site width. (83.3 is the default)'))
-                    ->export(),
-                (new ColorPickerField('field_645ebvf', 'color', 'Select the color for the text above the background'))
-                    ->export(),
-                (new ColorPickerField('field_ethoeiebvf', 'background_color', 'Select the color for the text above the background'))
-                    ->export(),
-                (new ImageField('field_hg243ie789gj6', 'background_image', 'Set the background image for this section'))
-                    ->setRequired()->export(),
-            ),
+        $group = new GroupField('field_5bbferg452be459a', 'Background Image Overlay Editor', '');
+
+        $group->setConditionalLogic($conditionalLogic);
+
+        $group->addSubField(
+            new TextField('field_hfu67h4b', 'id', 'The optional id for the section if this section should respond to link clicks')
         );
+        $group->addSubField(
+            (new WYSIWYGField('field_645tgrwihwe43', 'content', 'Enter the text to show above the background'))
+            ->setRequired()
+        );
+        $group->addSubField(
+            new NumberField('field_389t4uyfehj', 'height', 'Enter the height of this section in percentage of the site width. (83.3 is the default)')
+        );
+        $group->addSubField(
+            new ColorPickerField('field_645ebvf', 'color', 'Select the color for the text above the background')
+        );
+        $group->addSubField(
+            new ColorPickerField('field_ethoeiebvf', 'background_color', 'Select the color for the text above the background')
+        );
+        $group->addSubField(
+            (new ImageField('field_hg243ie789gj6', 'background_image', 'Set the background image for this section'))
+            ->setRequired()
+        );
+
+        return $group;
     }
 }

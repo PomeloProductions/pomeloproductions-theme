@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\ImageField;
-use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\ImageField;
+use PomeloProductions\Admin\ACFHelpers\Fields\WYSIWYGField;
 
 /**
  * Class FeaturedImage
@@ -53,28 +54,22 @@ class FeaturedImage extends BaseSection
      * Gets the acf fields required for this section
      *
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_hy552be459a',
-            'label' => 'Featured Image Editor',
-            'name' => 'featured_image_editor',
-            'type' => 'group',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new WYSIWYGField('field_regwe43', 'content', 'Enter the content to appear above this image'))->export(),
-                (new ImageField('field_6herg3', 'image', 'Select the image to appear for this section'))->setRequired()->export(),
-            ),
+        $group = new GroupField('field_hy552be459a', 'Featured Image Editor', '');
+
+        $group->setConditionalLogic($conditionalLogic);
+
+        $group->addSubField(
+            new WYSIWYGField('field_regwe43', 'content', 'Enter the content to appear above this image')
         );
+        $group->addSubField(
+            (new ImageField('field_6herg3', 'image', 'Select the image to appear for this section'))
+                ->setRequired()
+        );
+
+        return $group;
     }
 }

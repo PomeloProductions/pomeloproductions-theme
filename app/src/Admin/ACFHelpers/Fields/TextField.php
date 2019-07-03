@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace PomeloProductions\Admin\ACFHelpers;
+namespace PomeloProductions\Admin\ACFHelpers\Fields;
 
 /**
  * Class TextField
- * @package Theme\Admin\ACFHelpers
+ * @package Theme\Admin\ACFHelpers\Fields
  */
 class TextField extends BaseField
 {

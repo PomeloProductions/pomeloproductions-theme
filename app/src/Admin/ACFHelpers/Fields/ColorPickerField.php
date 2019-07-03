@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace PomeloProductions\Admin\ACFHelpers;
+namespace PomeloProductions\Admin\ACFHelpers\Fields;
 
 /**
  * Class ColorPickerField
- * @package Theme\Admin\ACFHelpers
+ * @package Theme\Admin\ACFHelpers\Fields
  */
 class ColorPickerField extends BaseField
 {

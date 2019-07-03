@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace PomeloProductions\Admin\ACFHelpers;
+namespace PomeloProductions\Admin\ACFHelpers\Fields;
+
+use PomeloProductions\Contracts\IsACFFieldContract;
 
 /**
  * Class BaseField
- * @package Theme\Admin\ACFHelpers
+ * @package Theme\Admin\ACFHelpers\Fields
  */
-abstract class BaseField
+abstract class BaseField implements IsACFFieldContract
 {
     /**
      * @var string
@@ -32,7 +34,17 @@ abstract class BaseField
     /**
      * @var bool
      */
+    private $allowNull = true;
+
+    /**
+     * @var bool
+     */
     private $required = false;
+
+    /**
+     * @var null|array
+     */
+    private $conditionalLogic = null;
 
     /**
      * @var string
@@ -58,7 +70,7 @@ abstract class BaseField
      * Sets the required variable
      *
      * @param bool $required
-     * @return BaseField
+     * @return BaseField|static
      */
     public function setRequired(bool $required = true) : BaseField
     {
@@ -67,10 +79,32 @@ abstract class BaseField
     }
 
     /**
+     * Sets whether or not this field can be set to null
+     *
+     * @param bool $allowNull
+     * @return BaseField|static
+     */
+    public function setAllowNull(bool $allowNull = true): BaseField
+    {
+        $this->allowNull = $allowNull;
+        return $this;
+    }
+
+    /**
+     * @param array|null $conditionalLogic
+     * @return BaseField
+     */
+    public function setConditionalLogic(?array $conditionalLogic): BaseField
+    {
+        $this->conditionalLogic = $conditionalLogic;
+        return $this;
+    }
+
+    /**
      * Sets the default value and then returns the field
      *
      * @param string $defaultValue
-     * @return BaseField
+     * @return BaseField|static
      */
     public function setDefaultValue(string $defaultValue) : BaseField
     {
@@ -81,7 +115,7 @@ abstract class BaseField
     /**
      * @return array
      */
-    public function export()
+    public function export(): array
     {
         return [
             'key' => $this->key,
@@ -90,13 +124,14 @@ abstract class BaseField
             'type' => $this->type,
             'instructions' => $this->instructions,
             'required' => $this->required,
-            'conditional_logic' => 0,
+            'conditional_logic' => $this->conditionalLogic,
             'wrapper' => [
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ],
             'default_value' => $this->defaultValue,
+            'allow_null' => $this->allowNull,
             'tabs' => 'all',
             'toolbar' => 'full',
             'media_upload' => 1,

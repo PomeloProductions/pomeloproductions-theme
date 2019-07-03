@@ -12,6 +12,11 @@ use PomeloProductions\Templates\BaseTemplate;
  */
 class SplashTemplate extends BaseTemplate
 {
+    /**
+     * This page does not have a header
+     *
+     * @return bool
+     */
     public function hasHeader(): bool
     {
         return false;

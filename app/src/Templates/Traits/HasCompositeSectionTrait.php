@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace PomeloProductions\Templates\Traits;
 
 use Handlebars\Handlebars;
+use PomeloProductions\Admin\ACFHelpers\Fields\RepeaterField;
+use PomeloProductions\Admin\ACFHelpers\Fields\SelectField;
 use PomeloProductions\Admin\ACFHelpers\ImageField;
+use PomeloProductions\Contracts\IsACFFieldContract;
 use PomeloProductions\Sections\BackgroundImageOverlay;
 use PomeloProductions\Sections\BaseSection;
 use PomeloProductions\Sections\Featured;
@@ -242,8 +245,66 @@ trait HasCompositeSectionTrait
      *
      * @return array
      */
-    public static function getACFField()
+    public static function getACFField(): RepeaterField
     {
+        $repeater = new RepeaterField(
+            'field_5bb7daf56ea0c',
+            'field_5bb7db296ea0d',
+            'Page Sections',
+            'Organize all sections for this page',
+        );
+        $repeater->setRequired(true);
+        $repeater->addSubField((new SelectField(
+            'field_5bb7db296ea0d',
+            'Section Type',
+            'Select What type of section this will be', [
+                'background_image_overlay' => 'Background Image With Text Overlay',
+                'featured' => 'Featured Section',
+                'featured_image' => 'Featured Image',
+                'full_width_cta' => 'Full Width CTA',
+                'image_grid' => 'Image Grid',
+                'page_title' => 'Page Title',
+                'sign_up' => 'Sign Up',
+                'slider' => 'Slider',
+                'spacer' => 'Spacer',
+                'social_media_icons' => 'Social Media Icons',
+                'standard_content' => 'Single Column Content Section',
+                'three_column' => 'Three Column Content Section',
+                'two_column' => 'Two Column Content Section',
+                'video' => 'Video',
+                'posts' => 'Posts',
+            ]))
+            ->setRequired(true)
+            ->setAllowNull(false)
+            ->setReturnValue('value'));
+        $repeater->addSubField(BackgroundImageOverlay::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'background_image_overlay',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(Featured::getACFGroup([
+                [
+                    [
+                        'field' => 'field_5bb7db296ea0d',
+                        'operator' => '==',
+                        'value' => 'featured',
+                    ],
+                ],
+        ]));
+        $repeater->addSubField(FeaturedImage::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'featured_image',
+                ],
+            ],
+        ]));
+
         return array(
             'key' => 'field_5bb7daf56ea0c',
             'label' => 'Page Sections',
@@ -263,71 +324,6 @@ trait HasCompositeSectionTrait
             'layout' => 'block',
             'button_label' => '',
             'sub_fields' => array(
-                array(
-                    'key' => 'field_5bb7db296ea0d',
-                    'label' => 'Section Type',
-                    'name' => 'section_type',
-                    'type' => 'select',
-                    'instructions' => 'Select What type of section this will be',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'choices' => array(
-                        'background_image_overlay' => 'Background Image With Text Overlay',
-                        'featured' => 'Featured Section',
-                        'featured_image' => 'Featured Image',
-                        'full_width_cta' => 'Full Width CTA',
-                        'image_grid' => 'Image Grid',
-                        'page_title' => 'Page Title',
-                        'sign_up' => 'Sign Up',
-                        'slider' => 'Slider',
-                        'spacer' => 'Spacer',
-                        'social_media_icons' => 'Social Media Icons',
-                        'standard_content' => 'Single Column Content Section',
-                        'three_column' => 'Three Column Content Section',
-                        'two_column' => 'Two Column Content Section',
-                        'video' => 'Video',
-                        'posts' => 'Posts',
-                    ),
-                    'default_value' => array(),
-                    'allow_null' => 0,
-                    'multiple' => 0,
-                    'ui' => 0,
-                    'return_format' => 'value',
-                    'ajax' => 0,
-                    'placeholder' => '',
-                ),
-                BackgroundImageOverlay::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'background_image_overlay',
-                        ),
-                    ),
-                )),
-                Featured::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'featured',
-                        ),
-                    ),
-                )),
-                FeaturedImage::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'featured_image',
-                        ),
-                    ),
-                )),
                 ImageGrid::getACFGroup(array(
                     array(
                         array(

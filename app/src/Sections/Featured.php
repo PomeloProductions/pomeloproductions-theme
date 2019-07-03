@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\ImageField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
 
 /**
  * Class Featured
@@ -141,239 +144,58 @@ class Featured extends BaseSection
      * @param array $conditionalLogic
      * @return array
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_5bb80a7be459a',
-            'label' => 'Featured Editor',
-            'name' => 'featured_editor',
-            'type' => 'group',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                array(
-                    'key' => 'field_5bb80ab1e459b',
-                    'label' => 'Primary Title',
-                    'name' => 'primary_title',
-                    'type' => 'text',
-                    'instructions' => 'Enter the title for the primary piece',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80ae9e459c',
-                    'label' => 'Primary Subtitle',
-                    'name' => 'primary_subtitle',
-                    'type' => 'text',
-                    'instructions' => 'Optional subtitle to the primary section',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80b05e459d',
-                    'label' => 'Action Text',
-                    'name' => 'action_text',
-                    'type' => 'text',
-                    'instructions' => 'The action text located above the primary title, and within the arrow in mobile layouts',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80b37e459e',
-                    'label' => 'Primary Link',
-                    'name' => 'primary_link',
-                    'type' => 'text',
-                    'instructions' => 'The link related to the primary section',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80bade459f',
-                    'label' => 'Primary Background Image',
-                    'name' => 'primary_background_image',
-                    'type' => 'image',
-                    'instructions' => '',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'return_format' => 'url',
-                    'preview_size' => 'featured-image',
-                    'library' => 'all',
-                    'min_width' => '',
-                    'min_height' => '',
-                    'min_size' => '',
-                    'max_width' => '',
-                    'max_height' => '',
-                    'max_size' => '',
-                    'mime_types' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80bd1e45a0',
-                    'label' => 'Second Title',
-                    'name' => 'second_title',
-                    'type' => 'text',
-                    'instructions' => 'The title used for the second featured section.',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80bf3e45a1',
-                    'label' => 'Second Link',
-                    'name' => 'second_link',
-                    'type' => 'text',
-                    'instructions' => 'The link related to the second article',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80c1de45a2',
-                    'label' => 'Second Background Image',
-                    'name' => 'second_background_image',
-                    'type' => 'image',
-                    'instructions' => 'The image that will be used for the background of the second featured section',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'return_format' => 'url',
-                    'preview_size' => 'thumbnail',
-                    'library' => 'all',
-                    'min_width' => '',
-                    'min_height' => '',
-                    'min_size' => '',
-                    'max_width' => '',
-                    'max_height' => '',
-                    'max_size' => '',
-                    'mime_types' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80c58e45a3',
-                    'label' => 'Third Title',
-                    'name' => 'third_title',
-                    'type' => 'text',
-                    'instructions' => 'The title of the third featured item',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80c76e45a4',
-                    'label' => 'Third Link',
-                    'name' => 'third_link',
-                    'type' => 'text',
-                    'instructions' => 'The link related to the third section',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                ),
-                array(
-                    'key' => 'field_5bb80c8ae45a5',
-                    'label' => 'Third Background Image',
-                    'name' => 'third_background_image',
-                    'type' => 'image',
-                    'instructions' => 'The background image for the third featured section',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'return_format' => 'array',
-                    'preview_size' => 'thumbnail',
-                    'library' => 'all',
-                    'min_width' => '',
-                    'min_height' => '',
-                    'min_size' => '',
-                    'max_width' => '',
-                    'max_height' => '',
-                    'max_size' => '',
-                    'mime_types' => '',
-                ),
-            ),
+        $group = new GroupField('field_5bb80a7be459a', 'Featured Editor', '');
+
+        $group->setConditionalLogic($conditionalLogic);
+
+        $group->addSubField(
+            (new TextField('field_5bb80ab1e459b', 'Primary Title', 'Enter the title for the primary piece'))
+                ->setRequired()
         );
+        $group->addSubField(
+            new TextField('field_5bb80ae9e459c', 'Primary Subtitle', 'Optional subtitle to the primary section')
+        );
+        $group->addSubField(
+            (new TextField('field_5bb80b05e459d', 'Action Text', 'The action text located above the primary title, and within the arrow in mobile layouts'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new TextField('field_5bb80b37e459e', 'Primary Link', 'The link related to the primary section'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new ImageField('field_5bb80bade459f', 'Primary Background Image', ''))
+                ->setRequired()
+        );
+
+        $group->addSubField(
+            (new TextField('field_5bb80bd1e45a0', 'Second Title', 'The title used for the second featured section.'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new TextField('field_5bb80bf3e45a1', 'Second Link', 'The link related to the second article'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new ImageField('field_5bb80c1de45a2', 'Second Background Image', 'The image that will be used for the background of the second featured section'))
+                ->setRequired()
+        );
+
+        $group->addSubField(
+            (new TextField('field_5bb80c58e45a3', 'Third Title', 'The title used for the third featured section.'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new TextField('field_5bb80c76e45a4', 'Third Link', 'The link related to the third article'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new ImageField('field_5bb80c8ae45a5', 'Third Background Image', 'The image that will be used for the background of the third featured section'))
+                ->setRequired()
+        );
+
+        return $group;
     }
 }

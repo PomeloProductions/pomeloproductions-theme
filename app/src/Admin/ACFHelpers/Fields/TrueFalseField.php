@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace PomeloProductions\Admin\ACFHelpers;
+namespace PomeloProductions\Admin\ACFHelpers\Fields;
 
 /**
  * Class TrueFalseField
- * @package Theme\Admin\ACFHelpers
+ * @package Theme\Admin\ACFHelpers\Fields
  */
 class TrueFalseField extends BaseField
 {
@@ -23,7 +23,7 @@ class TrueFalseField extends BaseField
     /**
      * @return array
      */
-    public function export()
+    public function export(): array
     {
         $config = parent::export();
 

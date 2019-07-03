@@ -59,4 +59,14 @@ abstract class BaseTemplate implements CanRenderContentContract
     {
         return true;
     }
+
+    public function getHeaderClass(): string
+    {
+
+    }
+
+    public static function getACFGroup()
+    {
+
+    }
 }
