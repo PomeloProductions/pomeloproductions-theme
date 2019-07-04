@@ -4,10 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Templates\Traits;
 
 use Handlebars\Handlebars;
+use PomeloProductions\Admin\ACFHelpers\Fields\ImageField;
 use PomeloProductions\Admin\ACFHelpers\Fields\RepeaterField;
 use PomeloProductions\Admin\ACFHelpers\Fields\SelectField;
-use PomeloProductions\Admin\ACFHelpers\ImageField;
-use PomeloProductions\Contracts\IsACFFieldContract;
 use PomeloProductions\Sections\BackgroundImageOverlay;
 use PomeloProductions\Sections\BaseSection;
 use PomeloProductions\Sections\Featured;
@@ -243,16 +242,16 @@ trait HasCompositeSectionTrait
     /**
      * Gets the ACF Field
      *
-     * @return array
+     * @return RepeaterField
      */
     public static function getACFField(): RepeaterField
     {
         $repeater = new RepeaterField(
             'field_5bb7daf56ea0c',
-            'field_5bb7db296ea0d',
             'Page Sections',
             'Organize all sections for this page',
         );
+        $repeater->setCollapsedKey('field_5bb7db296ea0d');
         $repeater->setRequired(true);
         $repeater->addSubField((new SelectField(
             'field_5bb7db296ea0d',
@@ -261,10 +260,8 @@ trait HasCompositeSectionTrait
                 'background_image_overlay' => 'Background Image With Text Overlay',
                 'featured' => 'Featured Section',
                 'featured_image' => 'Featured Image',
-                'full_width_cta' => 'Full Width CTA',
                 'image_grid' => 'Image Grid',
                 'page_title' => 'Page Title',
-                'sign_up' => 'Sign Up',
                 'slider' => 'Slider',
                 'spacer' => 'Spacer',
                 'social_media_icons' => 'Social Media Icons',
@@ -272,7 +269,6 @@ trait HasCompositeSectionTrait
                 'three_column' => 'Three Column Content Section',
                 'two_column' => 'Two Column Content Section',
                 'video' => 'Video',
-                'posts' => 'Posts',
             ]))
             ->setRequired(true)
             ->setAllowNull(false)
@@ -304,90 +300,70 @@ trait HasCompositeSectionTrait
                 ],
             ],
         ]));
+        $repeater->addSubField(ImageGrid::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'image_grid',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(Slider::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'slider',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(Spacer::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'spacer',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(StandardContent::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'standard_content',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(ThreeColumn::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'three_column',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(TwoColumn::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'two_column',
+                ],
+            ],
+        ]));
+        $repeater->addSubField(Video::getACFGroup([
+            [
+                [
+                    'field' => 'field_5bb7db296ea0d',
+                    'operator' => '==',
+                    'value' => 'video',
+                ],
+            ],
+        ]));
 
-        return array(
-            'key' => 'field_5bb7daf56ea0c',
-            'label' => 'Page Sections',
-            'name' => 'page_sections',
-            'type' => 'repeater',
-            'instructions' => 'Organize all sections for this page',
-            'required' => 1,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'collapsed' => 'field_5bb7db296ea0d',
-            'min' => 0,
-            'max' => 0,
-            'layout' => 'block',
-            'button_label' => '',
-            'sub_fields' => array(
-                ImageGrid::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'image_grid',
-                        ),
-                    ),
-                )),
-                Slider::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'slider',
-                        ),
-                    ),
-                )),
-                Spacer::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'spacer',
-                        ),
-                    ),
-                )),
-                StandardContent::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'standard_content',
-                        ),
-                    ),
-                )),
-                ThreeColumn::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'three_column',
-                        ),
-                    ),
-                )),
-                TwoColumn::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'two_column',
-                        ),
-                    ),
-                )),
-                Video::getACFGroup(array(
-                    array(
-                        array(
-                            'field' => 'field_5bb7db296ea0d',
-                            'operator' => '==',
-                            'value' => 'video',
-                        ),
-                    ),
-                )),
-            ),
-        );
+        return $repeater;
     }
 }

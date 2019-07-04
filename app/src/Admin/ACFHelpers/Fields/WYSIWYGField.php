@@ -19,4 +19,18 @@ class WYSIWYGField extends BaseField
     {
         parent::__construct('wysiwyg', $key, $name, $instructions);
     }
+
+    /**
+     * Makes sure to set media upload to true
+     *
+     * @return array
+     */
+    public function export(): array
+    {
+        $config = parent::export();
+
+        $config['media_upload'] = true;
+
+        return $config;
+    }
 }

@@ -92,7 +92,7 @@ abstract class BaseField implements IsACFFieldContract
 
     /**
      * @param array|null $conditionalLogic
-     * @return BaseField
+     * @return BaseField|static
      */
     public function setConditionalLogic(?array $conditionalLogic): BaseField
     {

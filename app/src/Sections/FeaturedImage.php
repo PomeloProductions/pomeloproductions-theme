@@ -58,7 +58,7 @@ class FeaturedImage extends BaseSection
      */
     public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        $group = new GroupField('field_hy552be459a', 'Featured Image Editor', '');
+        $group = new GroupField('field_hy552be459a', 'featured_image_editor', '');
 
         $group->setConditionalLogic($conditionalLogic);
 

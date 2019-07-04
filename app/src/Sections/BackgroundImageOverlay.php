@@ -93,7 +93,7 @@ class BackgroundImageOverlay extends BaseSection
      */
     public static function getACFGroup(array $conditionalLogic): GroupField
     {
-        $group = new GroupField('field_5bbferg452be459a', 'Background Image Overlay Editor', '');
+        $group = new GroupField('field_5bbferg452be459a', 'background_image_overlay_editor', '');
 
         $group->setConditionalLogic($conditionalLogic);
 

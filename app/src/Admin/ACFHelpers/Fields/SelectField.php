@@ -17,7 +17,7 @@ class SelectField extends BaseField
     /**
      * @var string
      */
-    private $returnValue;
+    private $returnValue = 'value';
 
     /**
      * SelectField constructor.

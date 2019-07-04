@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\TextField;
-use PomeloProductions\Admin\ACFHelpers\TrueFalseField;
-use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TrueFalseField;
+use PomeloProductions\Admin\ACFHelpers\Fields\WYSIWYGField;
 
 /**
  * Class StandardContent
@@ -80,32 +81,29 @@ class StandardContent extends BaseSection
      * @param array $conditionalLogic
      * @return array
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_5ber4rg58d7a',
-            'label' => 'Single Column Editor',
-            'name' => 'standard_content_editor',
-            'type' => 'group',
-            'instructions' => 'Input the content for the columns',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new TextField('field_eiurgfth4b', 'id', 'The optional id for the section if this section should respond to link clicks'))->export(),
-                (new TextField('field_5ergffd7b', 'title', 'The optional title for this content section'))->export(),
-                (new TextField('field_5e543d7b', 'subtitle', 'The optional subtitle for this content section'))->export(),
-                (new WYSIWYGField('field_hugrf3i', 'content', 'The main content section that will be displayed'))
-                    ->export(),
-                (new TrueFalseField('field_ueerg3498toerhg4tu', 'full_width', 'Do you want this section to be the full width of the screen?'))
-                    ->setDefaultValue('0')
-                    ->export(),
-            ),
+        $field = new GroupField('field_5ber4rg58d7a', 'single_column_editor', 'Input the content for the columns');
+
+        $field->setConditionalLogic($conditionalLogic);
+
+        $field->addSubField(
+            new TextField('field_eiurgfth4b', 'id', 'The optional id for the section if this section should respond to link clicks')
         );
+        $field->addSubField(
+            new TextField('field_5ergffd7b', 'title', 'The optional title for this content section')
+        );
+        $field->addSubField(
+            new TextField('field_5e543d7b', 'subtitle', 'The optional subtitle for this content section')
+        );
+        $field->addSubField(
+            new WYSIWYGField('field_hugrf3i', 'content', 'The main content section that will be displayed')
+        );
+        $field->addSubField(
+            (new TrueFalseField('field_ueerg3498toerhg4tu', 'full_width', 'Do you want this section to be the full width of the screen?'))
+                ->setDefaultValue('0')
+        );
+
+        return $field;
     }
 }

@@ -146,53 +146,53 @@ class Featured extends BaseSection
      */
     public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        $group = new GroupField('field_5bb80a7be459a', 'Featured Editor', '');
+        $group = new GroupField('field_5bb80a7be459a', 'featured_editor', '');
 
         $group->setConditionalLogic($conditionalLogic);
 
         $group->addSubField(
-            (new TextField('field_5bb80ab1e459b', 'Primary Title', 'Enter the title for the primary piece'))
+            (new TextField('field_5bb80ab1e459b', 'primary_title', 'Enter the title for the primary piece'))
                 ->setRequired()
         );
         $group->addSubField(
-            new TextField('field_5bb80ae9e459c', 'Primary Subtitle', 'Optional subtitle to the primary section')
+            new TextField('field_5bb80ae9e459c', 'primary_subtitle', 'Optional subtitle to the primary section')
         );
         $group->addSubField(
-            (new TextField('field_5bb80b05e459d', 'Action Text', 'The action text located above the primary title, and within the arrow in mobile layouts'))
+            (new TextField('field_5bb80b05e459d', 'action_text', 'The action text located above the primary title, and within the arrow in mobile layouts'))
                 ->setRequired()
         );
         $group->addSubField(
-            (new TextField('field_5bb80b37e459e', 'Primary Link', 'The link related to the primary section'))
+            (new TextField('field_5bb80b37e459e', 'primary_link', 'The link related to the primary section'))
                 ->setRequired()
         );
         $group->addSubField(
-            (new ImageField('field_5bb80bade459f', 'Primary Background Image', ''))
-                ->setRequired()
-        );
-
-        $group->addSubField(
-            (new TextField('field_5bb80bd1e45a0', 'Second Title', 'The title used for the second featured section.'))
-                ->setRequired()
-        );
-        $group->addSubField(
-            (new TextField('field_5bb80bf3e45a1', 'Second Link', 'The link related to the second article'))
-                ->setRequired()
-        );
-        $group->addSubField(
-            (new ImageField('field_5bb80c1de45a2', 'Second Background Image', 'The image that will be used for the background of the second featured section'))
+            (new ImageField('field_5bb80bade459f', 'primary_background_image', ''))
                 ->setRequired()
         );
 
         $group->addSubField(
-            (new TextField('field_5bb80c58e45a3', 'Third Title', 'The title used for the third featured section.'))
+            (new TextField('field_5bb80bd1e45a0', 'second_title', 'The title used for the second featured section.'))
                 ->setRequired()
         );
         $group->addSubField(
-            (new TextField('field_5bb80c76e45a4', 'Third Link', 'The link related to the third article'))
+            (new TextField('field_5bb80bf3e45a1', 'second_link', 'The link related to the second article'))
                 ->setRequired()
         );
         $group->addSubField(
-            (new ImageField('field_5bb80c8ae45a5', 'Third Background Image', 'The image that will be used for the background of the third featured section'))
+            (new ImageField('field_5bb80c1de45a2', 'second_background_image', 'The image that will be used for the background of the second featured section'))
+                ->setRequired()
+        );
+
+        $group->addSubField(
+            (new TextField('field_5bb80c58e45a3', 'third_title', 'The title used for the third featured section.'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new TextField('field_5bb80c76e45a4', 'third_link', 'The link related to the third article'))
+                ->setRequired()
+        );
+        $group->addSubField(
+            (new ImageField('field_5bb80c8ae45a5', 'third_background_image', 'The image that will be used for the background of the third featured section'))
                 ->setRequired()
         );
 

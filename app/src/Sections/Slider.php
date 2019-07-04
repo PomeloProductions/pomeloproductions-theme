@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\TextField;
-use PomeloProductions\Admin\ACFHelpers\TrueFalseField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TrueFalseField;
 
 /**
  * Class Slider
@@ -54,32 +55,23 @@ class Slider extends BaseSection
      * Gets the acf fields required for this section
      *
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_rehegrg452be459a',
-            'label' => 'Slider Editor',
-            'name' => 'slider_editor',
-            'type' => 'group',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new TextField('field_6gegrgwe43', 'slider_shortcode', 'Enter the short code needed for the slider'))
-                    ->setRequired()
-                    ->export(),
-                (new TrueFalseField('field_ueorhg4tu', 'featured_style', 'Do you want this slider to be displayed in the featured slider style?'))
-                    ->setDefaultValue('1')
-                    ->export(),
-            ),
+        $field = new GroupField('field_rehegrg452be459a', 'slider_editor', '');
+
+        $field->setConditionalLogic($conditionalLogic);
+
+        $field->addSubField(
+            (new TextField('field_6gegrgwe43', 'slider_shortcode', 'Enter the short code needed for the slider'))
+                ->setRequired()
         );
+        $field->addSubField(
+            (new TrueFalseField('field_ueorhg4tu', 'featured_style', 'Do you want this slider to be displayed in the featured slider style?'))
+                ->setDefaultValue('1')
+        );
+
+        return $field;
     }
 }

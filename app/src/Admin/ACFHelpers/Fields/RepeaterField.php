@@ -11,7 +11,9 @@ use PomeloProductions\Admin\ACFHelpers\Traits\HasSubFieldsTrait;
  */
 class RepeaterField extends BaseField
 {
-    use HasSubFieldsTrait;
+    use HasSubFieldsTrait {
+        export as exportSubFields;
+    }
 
     /**
      * @var string
@@ -21,14 +23,22 @@ class RepeaterField extends BaseField
     /**
      * GroupField constructor.
      * @param string $key
-     * @param string $collapsedKey
      * @param string $name
      * @param string $instructions
      */
-    public function __construct(string $key, string $collapsedKey, string $name, string $instructions)
+    public function __construct(string $key, string $name, string $instructions)
     {
         parent::__construct('repeater', $key, $name, $instructions);
+    }
+
+    /**
+     * @param string $collapsedKey
+     * @return RepeaterField
+     */
+    public function setCollapsedKey(string $collapsedKey): RepeaterField
+    {
         $this->collapsedKey = $collapsedKey;
+        return $this;
     }
 
     /**
@@ -36,7 +46,7 @@ class RepeaterField extends BaseField
      */
     public function export(): array
     {
-        $config = parent::export();
+        $config = $this->exportSubFields();
 
         $config['collapsed'] = $this->collapsedKey;
 

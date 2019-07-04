@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\TextField;
-use PomeloProductions\Admin\ACFHelpers\WYSIWYGField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
+use PomeloProductions\Admin\ACFHelpers\Fields\WYSIWYGField;
 
 /**
  * Class ThreeColumn
@@ -77,66 +78,36 @@ class ThreeColumn extends BaseSection
      * The acf group for the three column template
      *
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return [
-            'key' => 'field_5breherb7f7e4ffd7a',
-            'label' => 'Three Column Editor',
-            'name' => 'three_column_editor',
-            'type' => 'group',
-            'instructions' => 'Input the content for the columns',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ],
-            'layout' => 'block',
-            'sub_fields' => [
-                (new TextField('field_eiuhfu67h4b', 'id', 'The optional id for the section if this section should respond to link clicks'))->export(),
-                [
-                    'key' => 'field_5bregb7f827ffd7b',
-                    'label' => 'Top Content',
-                    'name' => 'top_content',
-                    'type' => 'wysiwyg',
-                    'instructions' => 'The content that shows up above the columns',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'tabs' => 'all',
-                    'toolbar' => 'full',
-                    'media_upload' => 1,
-                    'delay' => 0,
-                ],
-                [
-                    'key' => 'field_5bb7f5460f26d',
-                    'label' => '',
-                    'name' => 'row',
-                    'type' => 'group',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'layout' => 'table',
-                    'sub_fields' => [
-                        (new WYSIWYGField('field_ntrbb7f970ffd7e', 'column_1', 'The content for the first column'))->export(),
-                        (new WYSIWYGField('field_rnr7f9bbffd7f', 'column_2', 'The content for the second column'))->export(),
-                        (new WYSIWYGField('field_rtrhf9bbhjf', 'column_3', 'The content for the third column'))->export(),
-                    ],
-                ],
-            ],
-        ];
+        $field = new GroupField('field_5breherb7f7e4ffd7a', 'three_column_editor', 'Input the content for the columns');
+
+        $field->setConditionalLogic($conditionalLogic);
+
+        $field->addSubField(
+            new TextField('field_eiuhfu67h4b', 'id', 'The optional id for the section if this section should respond to link clicks')
+        );
+        $field->addSubField(
+            new WYSIWYGField('field_5bregb7f827ffd7b', 'Top Content', 'The content that shows up above the columns')
+        );
+
+        $columns = new GroupField('field_5bb7f5460f26d', 'row', '');
+        $columns->setLayout('table');
+
+        $columns->addSubField(
+            new WYSIWYGField('field_ntrbb7f970ffd7e', 'column_1', 'The content for the first column')
+        );
+        $columns->addSubField(
+            new WYSIWYGField('field_rnr7f9bbffd7f', 'column_2', 'The content for the second column')
+        );
+        $columns->addSubField(
+            new WYSIWYGField('field_rtrhf9bbhjf', 'column_3', 'The content for the third column')
+        );
+
+        $field->addSubField($columns);
+
+        return $field;
     }
 }

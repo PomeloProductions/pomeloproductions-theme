@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\ImageField;
-use PomeloProductions\Admin\ACFHelpers\TextField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\ImageField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TextField;
 
 /**
  * Class Video
@@ -82,31 +83,28 @@ class Video extends BaseSection
      * Gets the acf fields required for this section
      *
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_5bregrg452be459a',
-            'label' => 'Video Editor',
-            'name' => 'video_editor',
-            'type' => 'group',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new TextField('field_645erihwe43', 'title', 'Enter a title for this video'))->export(),
-                (new TextField('field_6hwe43', 'subtitle', 'Enter a subtitle for this video'))->export(),
-                (new TextField('field_6hwe4343rfs', 'video_url', 'Enter the url for this video. This url should preferably be a MP4.'))
-                    ->setRequired()->export(),
-                (new ImageField('field_43gv3e4ewg', 'thumbnail_url', 'Upload an image to use as the thumbnail'))->export(),
-            ),
+        $field = new GroupField('field_5bregrg452be459a', 'video_editor', '');
+
+        $field->setConditionalLogic($conditionalLogic);
+
+        $field->addSubField(
+            new TextField('field_645erihwe43', 'title', 'Enter a title for this video')
         );
+        $field->addSubField(
+            new TextField('field_6hwe43', 'subtitle', 'Enter a subtitle for this video')
+        );
+        $field->addSubField(
+            (new TextField('field_6hwe4343rfs', 'video_url', 'Enter the url for this video. This url should preferably be a MP4.'))
+                ->setRequired()
+        );
+        $field->addSubField(
+            new ImageField('field_43gv3e4ewg', 'thumbnail_url', 'Upload an image to use as the thumbnail')
+        );
+
+        return $field;
     }
 }

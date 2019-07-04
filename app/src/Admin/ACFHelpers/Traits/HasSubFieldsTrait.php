@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace PomeloProductions\Admin\ACFHelpers\Traits;
 
-use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
 use PomeloProductions\Contracts\IsACFFieldContract;
 
 /**
@@ -28,7 +27,7 @@ trait HasSubFieldsTrait
      * @param IsACFFieldContract $subField
      * @return static
      */
-    public function addSubField(IsACFFieldContract $subField): HasSubFieldsTrait
+    public function addSubField(IsACFFieldContract $subField)
     {
         $this->subFields[] = $subField->export();
         return $this;
@@ -36,9 +35,9 @@ trait HasSubFieldsTrait
 
     /**
      * @param string $layout
-     * @return GroupField|static
+     * @return static
      */
-    public function setLayout(string $layout): HasSubFieldsTrait
+    public function setLayout(string $layout)
     {
         $this->layout = $layout;
         return $this;

@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace PomeloProductions\Sections;
 
 use Handlebars\Handlebars;
-use PomeloProductions\Admin\ACFHelpers\NumberField;
+use PomeloProductions\Admin\ACFHelpers\Fields\GroupField;
+use PomeloProductions\Admin\ACFHelpers\Fields\NumberField;
 
 /**
  * Class Spacer
@@ -42,27 +43,15 @@ class Spacer extends BaseSection
 
     /**
      * @param array $conditionalLogic
-     * @return array
+     * @return GroupField
      */
-    public static function getACFGroup(array $conditionalLogic) : array
+    public static function getACFGroup(array $conditionalLogic) : GroupField
     {
-        return array(
-            'key' => 'field_5berbe58d7a',
-            'label' => 'Spacer',
-            'name' => 'spacer_editor',
-            'type' => 'group',
-            'instructions' => 'Set the spacing amount in pixels.',
-            'required' => 0,
-            'conditional_logic' => $conditionalLogic,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'layout' => 'block',
-            'sub_fields' => array(
-                (new NumberField('field_5ergefd7b', 'pixels', ''))->export(),
-            ),
-        );
+        $field = new GroupField('field_5berbe58d7a', 'spacer_editor', 'Set the spacing amount in pixels.');
+
+        $field->setConditionalLogic($conditionalLogic);
+        $field->addSubField(new NumberField('field_5ergefd7b', 'pixels', ''));
+
+        return $field;
     }
 }
