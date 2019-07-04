@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace PomeloProductions\Templates;
 
+use PomeloProductions\Admin\ACFHelpers\Fields\SelectField;
+use PomeloProductions\Admin\ACFHelpers\ParentGroup;
 use PomeloProductions\Contracts\CanRenderContentContract;
 use PomeloProductions\Theme;
 use PomeloProductions\Traits\CanProcessContentTrait;
@@ -60,13 +62,33 @@ abstract class BaseTemplate implements CanRenderContentContract
         return true;
     }
 
+    /**
+     * @return string
+     */
     public function getHeaderClass(): string
     {
-
+        return $this->getOption('header_style', 'simple');
     }
 
-    public static function getACFGroup()
+    /**
+     * @return array
+     */
+    public static function getHeaderStyleACFGroup(): array
     {
+        $group = new ParentGroup('group_oir3htoihgr3owk', 'Header Style');
+        $group->showOnAllPages();
+        $group->addField(
+            (new SelectField(
+                'field_oierghwiorghot4r3',
+                'header_style',
+                'Select the header style for this page', [
+                    'simple' => 'Simple',
+                    'splash' => 'Splash',
+                ]
+            ))
+            ->setDefaultValue('simple')
+        );
 
+        return $group->export();
     }
 }

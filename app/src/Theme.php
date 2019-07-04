@@ -312,6 +312,8 @@ class Theme
             $templateVariables['has_header'] = $template->hasHeader();
         }
 
+        $templateVariables['header_style'] = $template ? $template->getHeaderClass() : 'simple';
+
         $templateVariables['navigation'] = $this->mainNavigation->getNavigationItems();
 
         if ($this->childTheme) {

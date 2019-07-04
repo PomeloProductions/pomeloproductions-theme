@@ -68,6 +68,33 @@ class ParentGroup implements IsACFFieldContract
     }
 
     /**
+     * Makes sure to show this on every page
+     *
+     * @return ParentGroup
+     */
+    public function showOnAllPages(): ParentGroup
+    {
+        $this->locations = [
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '!=',
+                    'value' => 'post',
+                ],
+            ],
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '!=',
+                    'value' => 'page',
+                ],
+            ]
+        ];
+
+        return $this;
+    }
+
+    /**
      * Adds a field to the configuration
      *
      * @param IsACFFieldContract $field
@@ -87,8 +114,8 @@ class ParentGroup implements IsACFFieldContract
     public function export(): array
     {
         return [
-            'key' => 'group_5bb7daabf102c',
-            'title' => 'Composite',
+            'key' => $this->key,
+            'title' => $this->title,
             'fields' => $this->fields,
             'location' => $this->locations,
             'menu_order' => 0,

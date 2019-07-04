@@ -48,7 +48,7 @@ input[type=button] {
   max-width: 100% !important;
 }
 
-header {
+header.splash {
   background: white;
   text-align: center;
   .header_wrapper {
@@ -59,6 +59,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     z-index: 1000;
 
     #logo_wrapper {
@@ -90,6 +91,10 @@ header {
       }
     }
   }
+}
+
+header.simple {
+  padding: 10px;
 }
 
 footer {

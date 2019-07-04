@@ -5,6 +5,7 @@ namespace PomeloProductions\Admin;
 
 use Handlebars\Handlebars;
 use PomeloProductions\ChildTheme;
+use PomeloProductions\Templates\BaseTemplate;
 use PomeloProductions\Templates\Page\CompositeTemplate;
 use wpdb;
 
@@ -45,6 +46,8 @@ class RootController
         if (function_exists('acf_add_local_field_group')) {
 
             acf_add_local_field_group(CompositeTemplate::getACFGroup());
+            acf_add_local_field_group(BaseTemplate::getHeaderStyleACFGroup());
+
 
             if ($this->childTheme) {
                 $this->childTheme->registerAdmin();
