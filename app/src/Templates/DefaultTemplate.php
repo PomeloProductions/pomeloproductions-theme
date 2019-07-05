@@ -20,6 +20,7 @@ class DefaultTemplate extends BaseTemplate
      */
     public function render(Handlebars $templateEngine, array $templateVariables): string
     {
+        $templateVariables['page_title'] = $this->page->post_title;
         $templateVariables['page_content'] = $this->processContentString($this->page->post_content);
         return $templateEngine->render('default', $templateVariables);
     }
