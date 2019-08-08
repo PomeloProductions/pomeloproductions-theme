@@ -26,6 +26,7 @@ export default class Router {
   }
 
   loadEvents() {
+    this.fire('common');
 
     // Fire page-specific init JS, and then finalize JS
     document.body.className
@@ -37,5 +38,6 @@ export default class Router {
           this.fire(className);
           this.fire(className, 'finalize');
         });
+    this.fire('common', 'finalize');
   }
 }
