@@ -13,33 +13,29 @@ import camelCase from './camelCase';
 export default class Router {
   constructor(routes) {
     this.routes = routes;
+    this.loadedPages = [];
   }
 
   fire(route, fn = 'init', args) {
     const fire = route !== '' &&
-      this.routes[route] &&
-      typeof this.routes[route][fn] === 'function';
+        this.routes[route];
     if (fire) {
-      this.routes[route][fn](args);
+      let page = this.loadedPages[route] ? this.loadedPages[route] : new this.routes[route]();
+      page[fn](args);
     }
   }
 
   loadEvents() {
-    // Fire common init JS
-    this.fire('common');
 
     // Fire page-specific init JS, and then finalize JS
     document.body.className
-      .toLowerCase()
-      .replace(/-/g, '_')
-      .split(/\s+/)
-      .map(camelCase)
-      .forEach(className => {
-        this.fire(className);
-        this.fire(className, 'finalize');
-      });
-
-    // Fire common finalize JS
-    this.fire('common', 'finalize');
+        .toLowerCase()
+        .replace(/-/g, '_')
+        .split(/\s+/)
+        .map(camelCase)
+        .forEach(className => {
+          this.fire(className);
+          this.fire(className, 'finalize');
+        });
   }
 }

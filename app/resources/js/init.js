@@ -6,17 +6,19 @@ import home from './routes/home';
 
 export default function init(childRoutes = {}) {
 
+    let routeConfig = childRoutes;
+
+    if (!routeConfig.common) {
+        routeConfig.common = common;
+    }
+    if (!routeConfig.home) {
+        routeConfig.home = home;
+    }
     /**
      * Populate Router instance with DOM routes
      * @type {Router} routes - An instance of our router
      */
-    const routes = new Router(Object.assign({
-        /** All pages */
-        common,
-        /** Home page */
-        home,
-        /** About Us page, note the change from about-us to aboutUs. */
-    }, childRoutes));
+    const routes = new Router(routeConfig);
 
     smoothscroll.polyfill();
 
