@@ -317,6 +317,7 @@ class Theme
         $templateVariables['navigation'] = $this->mainNavigation->getNavigationItems();
 
         if ($this->childTheme) {
+            $templateVariables['branding'] = $this->childTheme->getBrandingName();
             $templateVariables = $this->childTheme->filterHeaderVariables($templateVariables);
         }
 
@@ -341,6 +342,10 @@ class Theme
         $templateVariables['navigation'] = $this->footerNavigation->getNavigationItems();
         $templateVariables['year'] = date('Y');
         $templateVariables['social_links'] = $this->socialMediaSettings->getSocialLinks($this->optionsManager);
+
+        if ($this->childTheme) {
+            $templateVariables['branding'] = $this->childTheme->getBrandingName() ?? "Pomelo Productions";
+        }
 
         return $this->templateEngine->render('footer', $templateVariables);
     }

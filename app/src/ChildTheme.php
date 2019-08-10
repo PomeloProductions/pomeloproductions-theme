@@ -56,6 +56,15 @@ abstract class ChildTheme
     {
         return false;
     }
+
+    /**
+     * Allows a child theme to customize the branding line throughout the site
+     */
+    public function getBrandingName(): ?string
+    {
+        return null;
+    }
+
     /**
      * Registers any admin things needed
      */
