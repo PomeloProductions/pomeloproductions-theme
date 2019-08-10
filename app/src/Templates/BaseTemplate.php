@@ -57,6 +57,16 @@ abstract class BaseTemplate implements CanRenderContentContract
      *
      * @return bool
      */
+    public function hasFooter(): bool
+    {
+        return $this->getOption('has_footer', true);
+    }
+
+    /**
+     * Override this and return false to toggle the header
+     *
+     * @return bool
+     */
     public function hasHeader(): bool
     {
         return true;
@@ -87,6 +97,14 @@ abstract class BaseTemplate implements CanRenderContentContract
                 ]
             ))
             ->setDefaultValue('simple')
+        );
+        $group->addField(
+            (new TrueFalsField(
+                'field_43theiirogeh',
+                'has_footer',
+                'Toggle whether or not this page has a footer',
+            ))
+            ->setDefaultValue('1')
         );
 
         return $group->export();

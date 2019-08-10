@@ -310,6 +310,8 @@ class Theme
 
         if ($template) {
             $templateVariables['has_header'] = $template->hasHeader();
+        } else {
+            $templateVariables['has_header'] = true;
         }
 
         $templateVariables['header_style'] = $template ? $template->getHeaderClass() : 'simple';
@@ -338,6 +340,12 @@ class Theme
 
         $templateVariables['wp_footer'] = $wpFooter;
         $templateVariables['analytics_key'] = '';
+
+        if ($template) {
+            $templateVariables['has_footer'] = $template->hasFooter();
+        } else {
+            $templateVariables['has_footer'] = true;
+        }
 
         $templateVariables['navigation'] = $this->footerNavigation->getNavigationItems();
         $templateVariables['year'] = date('Y');
