@@ -230,7 +230,7 @@ class Theme
 
         $pageContent = $this->renderHeader($baseTemplateVariables, $template);
         $pageContent.= $template->render($this->templateEngine, $baseTemplateVariables);
-        $pageContent.= $this->renderFooter($baseTemplateVariables);
+        $pageContent.= $this->renderFooter($baseTemplateVariables, $template);
 
         return $pageContent;
     }
@@ -332,7 +332,7 @@ class Theme
      * @param $templateVariables
      * @return string
      */
-    public function renderFooter($templateVariables)
+    public function renderFooter($templateVariables, BaseTemplate $template = null)
     {
         ob_start();
         wp_footer();

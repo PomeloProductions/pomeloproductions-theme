@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace PomeloProductions\Templates;
 
 use PomeloProductions\Admin\ACFHelpers\Fields\SelectField;
+use PomeloProductions\Admin\ACFHelpers\Fields\TrueFalseField;
 use PomeloProductions\Admin\ACFHelpers\ParentGroup;
 use PomeloProductions\Contracts\CanRenderContentContract;
 use PomeloProductions\Theme;
@@ -59,7 +60,7 @@ abstract class BaseTemplate implements CanRenderContentContract
      */
     public function hasFooter(): bool
     {
-        return $this->getOption('has_footer', true);
+        return (bool)$this->getOption('has_footer', true);
     }
 
     /**
@@ -99,7 +100,7 @@ abstract class BaseTemplate implements CanRenderContentContract
             ->setDefaultValue('simple')
         );
         $group->addField(
-            (new TrueFalsField(
+            (new TrueFalseField(
                 'field_43theiirogeh',
                 'has_footer',
                 'Toggle whether or not this page has a footer',
