@@ -353,6 +353,7 @@ class Theme
 
         if ($this->childTheme) {
             $templateVariables['branding'] = $this->childTheme->getBrandingName() ?? "Pomelo Productions";
+            $templateVariables['child_theme_social_media_links'] = $this->childTheme->getChildThemeSocialMediaLinks();
         }
 
         return $this->templateEngine->render('footer', $templateVariables);

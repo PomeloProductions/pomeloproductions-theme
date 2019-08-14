@@ -66,6 +66,16 @@ abstract class ChildTheme
     }
 
     /**
+     * Allows the child thing to insert child theme social media links if they want
+     *
+     * @return string|null
+     */
+    public function getChildThemeSocialMediaLinks(): ?string
+    {
+        return null;
+    }
+
+    /**
      * Registers any admin things needed
      */
     public abstract function registerAdmin();
