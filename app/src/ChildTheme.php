@@ -16,7 +16,7 @@ abstract class ChildTheme
     /**
      * @var Theme
      */
-    private $theme;
+    protected $theme;
 
     /**
      * ChildTheme constructor.
@@ -31,9 +31,10 @@ abstract class ChildTheme
      * Builds a page template or returns null if the child theme wants the parent theme to handle it
      *
      * @param WP_Post $page
+     * @param $options
      * @return BaseTemplate|null
      */
-    public abstract function buildPageTemplate(WP_Post $page) : ?BaseTemplate;
+    public abstract function buildPageTemplate(WP_Post $page, $options) : ?BaseTemplate;
 
     /**
      * Allows child themes to modify header variables in any ways

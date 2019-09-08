@@ -263,7 +263,7 @@ class Theme
         $options = $this->getPageOptions($page);
 
         if ($this->childTheme) {
-            $template = $this->childTheme->buildPageTemplate($page);
+            $template = $this->childTheme->buildPageTemplate($page, $options);
 
             if ($template) {
                 return $template;
