@@ -6,6 +6,7 @@ namespace PomeloProductions;
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
 use PomeloProductions\Admin\RootController;
+use PomeloProductions\Contracts\UsesChildTemplateEngineContract;
 use PomeloProductions\Navigation\Footer;
 use PomeloProductions\Navigation\Main;
 use PomeloProductions\Templates\BaseTemplate;
@@ -229,7 +230,11 @@ class Theme
         ];
 
         $pageContent = $this->renderHeader($baseTemplateVariables, $template);
-        $pageContent.= $template->render($this->templateEngine, $baseTemplateVariables);
+        if ($template instanceof UsesChildTemplateEngineContract) {
+            $pageContent.= $template->render($this->childTheme->templateEngine, $baseTemplateVariables);
+        } else {
+            $pageContent.= $template->render($this->templateEngine, $baseTemplateVariables);
+        }
         $pageContent.= $this->renderFooter($baseTemplateVariables, $template);
 
         return $pageContent;

@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace PomeloProductions;
 
-use PomeloProductions\Admin\RootController;
+use Handlebars\Handlebars;
+use Handlebars\Loader\FilesystemLoader;
 use PomeloProductions\Templates\BaseTemplate;
 use WP_Post;
 
@@ -19,12 +20,21 @@ abstract class ChildTheme
     protected $theme;
 
     /**
+     * @var Handlebars
+     */
+    public $templateEngine;
+
+    /**
      * ChildTheme constructor.
      * @param Theme $theme
      */
     public function __construct(Theme $theme)
     {
         $this->theme = $theme;
+        $this->templateEngine = new Handlebars([
+            'loader' => new FilesystemLoader($this->getTemplatesDirectory()),
+            'partials_loader' => new FilesystemLoader($this->getTemplatesDirectory() . '/partials')
+        ]);
     }
 
     /**
@@ -35,6 +45,13 @@ abstract class ChildTheme
      * @return BaseTemplate|null
      */
     public abstract function buildPageTemplate(WP_Post $page, $options) : ?BaseTemplate;
+
+    /**
+     * Gets the template directory for the child theme
+     *
+     * @return string
+     */
+    public abstract function getTemplatesDirectory() : string;
 
     /**
      * Allows child themes to modify header variables in any ways
