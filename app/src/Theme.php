@@ -142,7 +142,7 @@ class Theme
     {
         global $wpdb;
 
-        new RootController($wpdb, $this->templateEngine, $this->loadBuildManifest(__DIR__));
+        new RootController($wpdb, $this->templateEngine, $this->loadBuildManifest(__DIR__), $this->childTheme);
     }
 
     /**

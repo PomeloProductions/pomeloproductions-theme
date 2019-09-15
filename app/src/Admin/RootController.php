@@ -48,7 +48,6 @@ class RootController
             acf_add_local_field_group(CompositeTemplate::getACFGroup());
             acf_add_local_field_group(BaseTemplate::getHeaderStyleACFGroup());
 
-
             if ($this->childTheme) {
                 $this->childTheme->registerAdmin();
             }
