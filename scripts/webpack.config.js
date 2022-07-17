@@ -4,9 +4,8 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const AssetsPlugin = require('assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const path = require('path');
 const fs = require('fs');
 
@@ -32,11 +31,15 @@ module.exports = {
   // We generate sourcemaps in production. This is slow but gives good results.
   // You can exclude the *.map files from the build during deployment.
   target: 'web',
-  devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
+  devtool: DEV ? 'eval-cheap-source-map' : 'source-map',
   entry: [paths.appIndexJs],
   output: {
     path: paths.appBuild,
     filename: 'bundle.[hash:8].js',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   module: {
     rules: [
@@ -49,42 +52,35 @@ module.exports = {
         include: paths.appSrc,
       },
       {
-        test: /.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                minimize: !DEV
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                plugins: () => [
-                  autoprefixer({
-                    browsers: [
-                      '>1%',
-                      'last 4 versions',
-                      'Firefox ESR',
-                      'not ie < 9', // React doesn't support IE8 anyway
-                    ],
-                  }),
-                ],
-              },
-            },
-            'sass-loader',
-          ],
-        }),
+        test: /\.(css)$/,
+        use: [MiniCssExtractPlugin.loader,'css-loader']
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
+        }]
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
       },
     ],
   },
   plugins: [
     !DEV && new CleanWebpackPlugin(['build']),
-    new ExtractTextPlugin('bundle.[hash:8].css'),
+    new MiniCssExtractPlugin({filename: 'bundle.[hash:8].css'}),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false,
@@ -93,13 +89,5 @@ module.exports = {
       path: paths.appBuild,
       filename: 'assets.json',
     }),
-    !DEV &&
-      new UglifyJSPlugin({
-        sourceMap: true,
-      }),
-    DEV &&
-      new FriendlyErrorsPlugin({
-        clearConsole: false,
-      }),
   ].filter(Boolean),
 };
