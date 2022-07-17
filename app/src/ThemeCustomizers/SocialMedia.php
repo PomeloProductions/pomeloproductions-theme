@@ -55,6 +55,6 @@ class SocialMedia
     {
         $socialLinks = $optionManager->getOption('social');
 
-        return count($socialLinks) ? array_filter($socialLinks, 'strlen') : [];
+        return $socialLinks && count($socialLinks) ? array_filter($socialLinks, 'strlen') : [];
     }
 }
