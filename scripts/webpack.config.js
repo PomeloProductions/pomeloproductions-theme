@@ -3,9 +3,12 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const AssetsPlugin = require('assets-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 const fs = require('fs');
 
@@ -18,7 +21,7 @@ function resolveApp(relativePath) {
 }
 
 const paths = {
-  appSrc: resolveApp('app/resources/js'),
+  appSrc: resolveApp('src'),
   appBuild: resolveApp('build'),
   appIndexJs: resolveApp('app/resources/js/index.js'),
   appNodeModules: resolveApp('node_modules'),
@@ -28,18 +31,15 @@ const DEV = process.env.NODE_ENV === 'development';
 
 module.exports = {
   bail: !DEV,
+  mode: DEV ? 'development' : 'production',
   // We generate sourcemaps in production. This is slow but gives good results.
   // You can exclude the *.map files from the build during deployment.
   target: 'web',
-  devtool: DEV ? 'eval-cheap-source-map' : 'source-map',
+  devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
   entry: [paths.appIndexJs],
   output: {
     path: paths.appBuild,
-    filename: 'bundle.[hash:8].js',
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
+    filename: DEV ? 'bundle.js' : 'bundle.[hash:8].js'
   },
   module: {
     rules: [
@@ -52,10 +52,6 @@ module.exports = {
         include: paths.appSrc,
       },
       {
-        test: /\.(css)$/,
-        use: [MiniCssExtractPlugin.loader,'css-loader']
-      },
-      {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
           loader: 'file-loader',
@@ -66,21 +62,62 @@ module.exports = {
         }]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /.scss$/,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: "postcss", // https://webpack.js.org/guides/migrating/#complex-options
+              plugins: () => [
+                autoprefixer({
+                  browsers: [
+                    ">1%",
+                    "last 4 versions",
+                    "Firefox ESR",
+                    "not ie < 9" // React doesn't support IE8 anyway
+                  ]
+                })
+              ]
+            }
+          },
+          "sass-loader"
         ],
-      },
+      }
     ],
+  },
+  optimization: {
+    minimize: !DEV,
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          map: {
+            inline: false,
+            annotation: true,
+          }
+        }
+      }),
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            warnings: false
+          },
+          output: {
+            comments: false
+          }
+        },
+        sourceMap: true
+      })
+    ]
   },
   plugins: [
     !DEV && new CleanWebpackPlugin(['build']),
-    new MiniCssExtractPlugin({filename: 'bundle.[hash:8].css'}),
+    new MiniCssExtractPlugin({
+      filename: DEV ? 'bundle.css' : 'bundle.[hash:8].css'
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false,
@@ -88,6 +125,19 @@ module.exports = {
     new AssetsPlugin({
       path: paths.appBuild,
       filename: 'assets.json',
+    }),
+    DEV &&
+    new FriendlyErrorsPlugin({
+      clearConsole: false,
+    }),
+    DEV &&
+    new BrowserSyncPlugin({
+      notify: false,
+      host: 'localhost',
+      port: 4000,
+      logLevel: 'silent',
+      files: ['./template/*.php'],
+      proxy: 'http://localhost:9009/',
     }),
   ].filter(Boolean),
 };

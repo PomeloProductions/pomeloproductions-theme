@@ -1,4 +1,4 @@
-# SGC International
+# Pomelo Productions
 
 > Make Wordpress theme development great again.
 
@@ -12,7 +12,7 @@
 
 ## Requirements
 
-- Node.js
+- Node.js <= 14
 - Yarn
 
 ## Getting Started

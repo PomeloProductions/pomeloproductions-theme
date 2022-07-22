@@ -12,16 +12,14 @@ process.on('unhandledRejection', err => {
 const webpack = require('webpack');
 const config = require('./webpack.config');
 
-const clientCompiler = webpack(config);
-
 console.log('[0/1] Creating an optimized production build...');
-compile(config, (err, stats) => {
+compile((err, stats) => {
   handleWebpackErrors(err, stats);
   console.log('[1/1] Build successful!');
 });
 
 // Wrap webpack compile in a try catch.
-function compile(config, cb) {
+function compile(cb) {
   let compiler;
   try {
     compiler = webpack(config);
@@ -56,13 +54,13 @@ function handleWebpackErrors(err, stats) {
     process.exit(1);
   }
   if (
-    process.env.CI &&
-    stats.compilation.warnings &&
-    stats.compilation.warnings.length
+      process.env.CI &&
+      stats.compilation.warnings &&
+      stats.compilation.warnings.length
   ) {
     printErrors(
-      'Failed to compile. When process.env.CI = true, warnings are treated as failures. Most CI servers set this automatically.',
-      stats.compilation.warnings
+        'Failed to compile. When process.env.CI = true, warnings are treated as failures. Most CI servers set this automatically.',
+        stats.compilation.warnings
     );
     process.exit(1);
   }
