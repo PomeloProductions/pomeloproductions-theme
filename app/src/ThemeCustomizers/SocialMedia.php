@@ -53,8 +53,8 @@ class SocialMedia
      */
     public function getSocialLinks(OptionsManager $optionManager)
     {
-        $socialLinks = $optionManager->getOption('social');
+        $socialLinks = $optionManager->getOption('social') ?? [];
 
-        return $socialLinks && count($socialLinks) ? array_filter($socialLinks, 'strlen') : [];
+        return is_array($socialLinks) ? array_filter($socialLinks, 'strlen') : [];
     }
 }
